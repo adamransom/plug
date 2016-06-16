@@ -8,6 +8,14 @@ The goal of this project is to create a framework for building AI assistants, us
 
 The framework itself won't have any interface as such, but it will be easy to add one. Initially this project is being built with a [Slack](https://slack.com) bot acting as the front-end interface.
 
+The general flow looks something like this:
+
+```
+Interface (Slack Bot) →              Plug             → Interface (Slack Bot)
+                                      ↑↓ 
+                        [Wit.Ai → Plug → User Plugins] 
+```
+
 ## Interaction Examples
 
 There a few ideas of the types of interactions/questions/requests that the bot will be able to handle. Some ideas are shown below.
