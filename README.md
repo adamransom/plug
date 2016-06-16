@@ -12,8 +12,8 @@ The general flow looks something like this:
 
 ```
 Interface (Slack Bot) →              Plug             → Interface (Slack Bot)
-                                      ↑↓ 
-                        [Wit.Ai → Plug → User Plugins] 
+                                      ↑↓
+                        [Wit.Ai → Plug → User Plugins]
 ```
 
 ## Interaction Examples
@@ -21,10 +21,6 @@ Interface (Slack Bot) →              Plug             → Interface (Slack Bot
 There a few ideas of the types of interactions/questions/requests that the bot will be able to handle. Some ideas are shown below.
 
 _Note: Some of these examples may be similar implementations, and a lot will be done in the application using this framework, but they are just to give an example of different possibilities._
-
-### Simple Questions
-
-These are simple, one line questions with simple responses. Examples:
 
 ```
 User: What's the weather like in Tokyo?
@@ -36,20 +32,12 @@ User: Is it morning in London right now?
 Plug: Yep, it's 10:31am over there.
 ```
 
-### Simple Questions Requiring Follow-up
-
-Again, these are relatively simple questions but occasionally the user will miss out a piece of information thats necessary. For example, if the bot isn't yet aware of where the user is:
-
 ```
 User: Is it raining at the moment?
 Plug: Where are you right now?
 User: Paris.
 Plug: Ah, OK. Yeah, it's raining in Paris. Gonna need an umbrella!
 ```
-
-### Actions Requiring Persistent State
-
-These are ongoing requests, which may require context and state to be persisted over a number of days/weeks/months etc.
 
 ```
 User: Could you remind me to update Git tomorrow?
@@ -59,10 +47,6 @@ Plug: Sure, will do!
 
 Plug: Hey, User! Don't forget to update Git!
 ```
-
-### Long Conversations for Complex Tasks
-
-This is for allowing the bot to help with slightly more complex tasks that requires persistent state and multiple question/answer sequences.
 
 ```
 User: Plug, can we set up a new AWS stack?
@@ -80,10 +64,6 @@ Plug: Sure, I'll start setting it up.
 User: How's it going, Plug?
 Plug: Still setting up the EC2 instances. 58% done so far.
 ```
-
-### Multi-User Converstations
-
-If there are multiple people talking to the bot at once (as could be the case in Slack), you can really have some interesting interactions.
 
 ```
 User 1: Plug, could you book a meeting room at 2pm?
