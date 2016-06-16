@@ -1,0 +1,31 @@
+{
+  "name": "plug",
+  "version": "0.0.1",
+  "description": "A pluggable, personal assistant",
+  "main": "dist/index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "start": "node examples/simple.js",
+    "build": "babel src --out-dir dist",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamransom/plug.git"
+  },
+  "author": "Adam Ransom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamransom/plug/issues"
+  },
+  "homepage": "https://github.com/adamransom/plug#readme",
+  "dependencies": {
+    "node-wit": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0"
+  }
+}
