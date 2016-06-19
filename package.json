@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/adamransom/plug#readme",
   "dependencies": {
+    "flat": "^2.0.0",
     "node-wit": "^3.3.2"
   },
   "devDependencies": {

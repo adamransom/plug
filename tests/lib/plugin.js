@@ -4,18 +4,19 @@ import sinon from 'sinon';
 
 import Plugin from '../../src/lib/plugin';
 
-const strings = {
-  common: {
-    missing_action: 'missing_action',
-  }
-};
 
 describe('Plugin', () => {
   let plugin;
+  let strings;
 
   describe('[all]', () => {
     beforeEach(() => {
       plugin = new Plugin();
+      strings = {
+        common: {
+          missing_action: 'missing_action',
+        }
+      };
     });
 
     describe('#constructor', () => {
@@ -88,9 +89,10 @@ describe('Plugin', () => {
   describe('[with actions]', () => {
     class WithActions extends Plugin {
       constructor(matchContext) {
-        super({}, matchContext);
+        super(strings, matchContext);
 
         this.actions = ['action'];
+        this.responses = ['response'];
       }
     };
 
@@ -114,6 +116,43 @@ describe('Plugin', () => {
         const context = { intent: 'an_action' };
 
         const fn = () => { plugin.act(context, () => {}) };
+
+        assert.throws(fn, TypeError);
+      });
+    });
+
+    describe('#respond', () => {
+      it('calls the matcher passed to it with reponses and context', () => {
+        const matchContext = sinon.stub().returns(null);
+        const plugin = new WithActions(matchContext);
+        const context = { intent: 'an_action' };
+        const expected = [ ['response'], context ];
+
+        plugin.respond(context);
+
+        const actual = matchContext.getCall(0).args;
+
+        assert.deepEqual(actual, expected);
+      });
+
+      it('converts the response into natural text using `this.strings`', () => {
+        strings.reply = { default: 'Reply' };
+
+        const matchContext = sinon.stub().returns({ response: 'reply.default' });
+        const plugin = new WithActions(matchContext);
+        const context = { intent: 'an_action' };
+        const expected = strings.reply.default;
+        const actual = plugin.respond(context);
+
+        assert.equal(actual, expected);
+      });
+
+      it('throws if the action is not a function', () => {
+        const matchContext = sinon.stub().returns(true);
+        const plugin = new WithActions(matchContext);
+        const context = { intent: 'an_action' };
+
+        const fn = () => { plugin.respond(context) };
 
         assert.throws(fn, TypeError);
       });

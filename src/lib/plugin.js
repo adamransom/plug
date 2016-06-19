@@ -1,3 +1,4 @@
+import Messages from './messages';
 import defaultMatchContext from './default_match_context';
 
 /**
@@ -20,7 +21,7 @@ export default class Plugin {
       throw new TypeError("Argument 'strings' must be an object");
     }
 
-    this.strings = strings;
+    this.messages = new Messages(strings);
     this.matchContext = matchContext;
   }
 
@@ -74,11 +75,18 @@ export default class Plugin {
       throw new TypeError("Argument 'context' must be an object");
     }
 
-    if (this.strings.common &&
-        this.strings.common.missing_action) {
-      return this.strings.common.missing_action;
+    if (Array.isArray(this.responses) && this.responses.length > 0) {
+      const match = this.matchContext(this.responses, context);
+
+      if (match) {
+        if (typeof match.response === 'string') {
+          return this.messages.pick(match.response, context);
+        } else {
+          throw new TypeError(`Response must be a string. Found '${match.response}' instead`);
+        }
+      }
     }
 
-    return '';
+    return this.messages.pick('common.missing_action');
   }
 }

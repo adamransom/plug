@@ -43,7 +43,9 @@ export default function defaultMatchContext(items, context) {
             item.context[key] === key
           )
         } else {
-          throw new TypeError(`Context item '${key}' must be an array of objects containing a 'value' key`);
+          throw new TypeError(
+            `Context item '${key}' must be an array of objects containing a 'value' key`
+          );
         }
       }
 
