@@ -16,7 +16,18 @@ Interface (Slack Bot) →              Plug             → Interface (Slack Bot
                         [Wit.Ai → Plug → User Plugins]
 ```
 
-## Interaction Examples
+## Running the Examples
+
+There are a few examples included (or will be eventually). In order to run them you need to do the following:
+
+```Bash
+npm install
+npm start
+```
+
+This will install dependencies and then run the `simple.js` example.
+
+## Interaction Ideas
 
 There a few ideas of the types of interactions/questions/requests that the bot will be able to handle. Some ideas are shown below.
 
