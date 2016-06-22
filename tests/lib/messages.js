@@ -34,6 +34,36 @@ describe('Messages', () => {
     })
   });
 
+  describe('#merge', () => {
+    it('adds new single keys to `strings`', () => {
+      messages.merge({ new: 'value' });
+
+      assert.property(messages.strings, 'new');
+    });
+
+    it('adds new nested keys to `strings`', () => {
+      messages.merge({ new: { nested: 'value' } });
+
+      assert.property(messages.strings, 'new.nested');
+    });
+
+    it('replaces existing single keys', () => {
+      messages.merge({ single_string: 'World' });
+
+      assert.propertyVal(messages.strings, 'single_string', 'World');
+    });
+
+    it('replaces existing nested keys', () => {
+      messages.merge({ nested: { string: 'Hello' } });
+
+      assert.propertyVal(messages.strings, 'nested.string', 'Hello');
+    });
+
+    describe('(strings)', () => {
+      assertArgIsObject(arg => new Messages(arg), 'strings');
+    })
+  });
+
   describe('#pick', () => {
     describe('(key, ...)', () => {
       it('throws if key is not a string', () => {

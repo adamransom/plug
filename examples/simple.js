@@ -9,22 +9,22 @@ const Plug = require('../');
 // Create a new bot instance
 const bot = new Plug.Bot();
 
-// Set up strings
-const strings = {
-  time: {
-    reply: {
-      default: [
-        'The time is #{time}!',
-        'It is #{time} now!',
-      ]
-    }
-  }
-};
-
 // Define an extremely basic plugin
 class TimePlugin extends Plug.Plugin {
-  constructor() {
+  constructor(strings) {
     super(strings);
+
+    // Set up plugin-specific strings
+    this.strings = {
+      time: {
+        reply: {
+          default: [
+            'The time is #{time}!',
+            'It is #{time} now!',
+          ]
+        }
+      }
+    }
 
     // Create a mapping of actions to run depending
     // on the current context.
@@ -52,8 +52,14 @@ class TimePlugin extends Plug.Plugin {
   }
 }
 
+const commonStrings = {
+  common: {
+    missing_action: "Sorry, I don't know what you are talking about :/",
+  }
+};
+
 // Crudely test our plugin
-const timePlugin = new TimePlugin();
+const timePlugin = new TimePlugin(commonStrings);
 timePlugin.act({ intent: [{ value: 'time' }] }, context => {
   const response = timePlugin.respond(context);
   console.log(response);

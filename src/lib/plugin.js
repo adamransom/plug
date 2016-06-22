@@ -11,7 +11,7 @@ export default class Plugin {
   /**
    * Constructs a new plugin.
    *
-   * @param {object} [strings] - An object containing keys and corresponding
+   * @param {object} [strings] - An object containing common keys and corresponding
    *                             text used for response output
    * @param {function} [matchContext] - A function used to match context with an
    *                                    action
@@ -23,6 +23,16 @@ export default class Plugin {
 
     this.messages = new Messages(strings);
     this.matchContext = matchContext;
+  }
+
+  /**
+   * Sets the plugin-specific text for response output
+   *
+   * @param {object} [strings] - An object containing plugin-specific keys and
+   *                             corresponding text used for response output
+   */
+  set strings(strings) {
+    this.messages.merge(strings);
   }
 
   /**

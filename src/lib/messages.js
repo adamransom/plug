@@ -20,6 +20,14 @@ export default class Messages {
     this.strings = flatten(strings, { safe: true });
   }
 
+  merge(strings) {
+    if (typeof strings !== 'object' || Array.isArray(strings)) {
+      throw new TypeError("Argument 'strings' must be an object");
+    }
+
+    Object.assign(this.strings, flatten(strings, { safe: true }));
+  }
+
   /**
    * Picks a message using the key path and interpolating using the context
    *

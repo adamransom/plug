@@ -25,6 +25,14 @@ describe('Plugin', () => {
       });
     });
 
+    describe('#set strings', () => {
+      it('updates the messages', () => {
+        plugin.strings = { new: 'value' };
+
+        assert.property(plugin.messages.strings, 'new');
+      });
+    });
+
     describe('#act', () => {
       describe('(context, ...)', () => {
         assertArgIsObject(arg => plugin.act(arg, () => {}), 'context');
