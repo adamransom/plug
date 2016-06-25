@@ -45,7 +45,7 @@ export default class Messages {
       throw new TypeError("Argument 'context' must be an object");
     }
 
-    let message = '';
+    let message = key;
 
     if (this.strings.hasOwnProperty(key)) {
       const value = this.strings[key];

@@ -111,6 +111,13 @@ describe('Messages', () => {
 
       assert.include(expected, actual);
     });
+
+    it('returns the provided key if no string can be found', () => {
+      const expected = 'this.does.not.exist';
+      const actual = messages.pick('this.does.not.exist');
+
+      assert.equal(actual, expected);
+    });
   });
 
   describe('#interpolate', () => {

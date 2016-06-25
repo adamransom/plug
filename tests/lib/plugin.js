@@ -83,14 +83,6 @@ describe('Plugin', () => {
 
         assert.equal(actual, expected);
       });
-
-      it('returns empty string if common.missing_action unavailable', () => {
-        const context = { intent: 'Something' };
-        const expected = '';
-        const actual = plugin.respond(context);
-
-        assert.equal(actual, expected);
-      });
     });
   });
 

@@ -6,9 +6,6 @@
 //
 const Plug = require('../');
 
-// Create a new bot instance
-const bot = new Plug.Bot();
-
 // Define an extremely basic plugin
 class TimePlugin extends Plug.Plugin {
   constructor(strings) {
@@ -55,12 +52,22 @@ class TimePlugin extends Plug.Plugin {
 const commonStrings = {
   common: {
     missing_action: "Sorry, I don't know what you are talking about :/",
+    missing_intent: "Umm, I don't really know what you want me to do :(",
+    missing_plugin: "I don't think I've been taught how to handle this yet!",
   }
 };
 
-// Crudely test our plugin
-const timePlugin = new TimePlugin(commonStrings);
-timePlugin.act({ intent: [{ value: 'time' }] }, context => {
-  const response = timePlugin.respond(context);
+// Create a new bot instance
+const bot = new Plug.Bot(
+  { time: TimePlugin },
+  commonStrings,
+  { witToken: 'ZJFOZPU5MKZLRCJT562ZH67G5WB6KELU' }
+);
+
+
+// Test our bot!
+const message = "What's the time?";
+console.log(`> ${message}`);
+bot.message(message, {}, (response, context) => {
   console.log(response);
 });
